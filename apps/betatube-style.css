@@ -1,0 +1,78 @@
+/**
+ * ====================================================================
+ * 🎨 BETATUBE VIP — DYNAMIC VISUAL LAYOUT & GLASSMORPHISM LAYER
+ * ====================================================================
+ * Property of: Betatube-VIP-Android (Tunisia 2026)
+ * Real-time Responsive Positioning & Micro-Dimensions Engine
+ * ====================================================================
+ */
+
+/* وعاء العناصر الرئيسي الشفاف فوق مشغل اليوتيوب */
+#betatube-vip-canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 999999 !important;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    box-sizing: border-box !important;
+}
+
+/* شريط الإعلانات السفلي المتطور (Mode Glassmorphism) */
+#betatube-ticker {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-top: 2px solid rgba(255, 255, 255, 0.1) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+#betatube-ticker marquee {
+    width: 100% !important;
+    color: #ffffff !important;
+    letter-spacing: 0.5px !important;
+    padding: 0 10px !important;
+}
+
+/* وعاء الـ QR Code الذكي المحمي والمتحكم بأبعاده */
+#betatube-qrcode-zone {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(5px) !important;
+    animation: qrGlow 3s infinite alternate !important;
+}
+
+/* منطقة مشغل فيديو الإشهار المتعدد (Playlist Player) */
+#betatube-video-ad-zone {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+    background: #000000 !important;
+    background-size: cover !important;
+}
+
+/* تأثير نبضي ناعم للـ QR Code لجذب انتباه الزبائن للمنيو والواي فاي */
+@keyframes qrGlow {
+    0% {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 0 0px rgba(245, 158, 11, 0);
+    }
+    100% {
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 8px rgba(245, 158, 11, 0.6);
+    }
+}
+
+/* نظام العداد التنازلي المشتعل للعروض الفلاشية (Flash Sales Ticker) */
+.betatube-flash-active {
+    background: linear-gradient(90deg, #7f1d1d rgba(15, 23, 42, 0.85)) !important;
+    border-top: 2px solid #ef4444 !important;
+    animation: flashAlert 1.5s infinite alternate !important;
+}
+
+@keyframes flashAlert {
+    0% { border-color: #ef4444; }
+    100% { border-color: #f59e0b; }
+}
