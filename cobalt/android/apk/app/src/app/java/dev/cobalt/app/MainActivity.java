@@ -17,6 +17,7 @@ package dev.cobalt.app;
 import android.app.Activity;
 import android.app.Service;
 import android.os.Bundle;
+import dev.cobalt.app.betatube.BetaTubeManager;
 import dev.cobalt.coat.ArtworkDownloaderDefault;
 import dev.cobalt.coat.CobaltActivity;
 import dev.cobalt.coat.CobaltService;
@@ -31,6 +32,8 @@ import dev.cobalt.util.Holder;
  * methods to "inject" things that can be customized.
  */
 public class MainActivity extends CobaltActivity {
+
+  private BetaTubeManager mBetaTubeManager;
 
   @Override
   protected StarboardBridge createStarboardBridge(String[] args, String startDeepLink) {
@@ -55,5 +58,16 @@ public class MainActivity extends CobaltActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mBetaTubeManager = new BetaTubeManager();
+    mBetaTubeManager.initialize(this);
+  }
+
+  @Override
+  protected void onDestroy() {
+    if (mBetaTubeManager != null) {
+      mBetaTubeManager.destroy();
+      mBetaTubeManager = null;
+    }
+    super.onDestroy();
   }
 }

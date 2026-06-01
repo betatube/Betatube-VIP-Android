@@ -16,6 +16,7 @@ package dev.cobalt.app;
 
 import android.app.Application;
 import android.content.Context;
+import com.google.firebase.FirebaseApp;
 import dev.cobalt.coat.StarboardBridge;
 import org.chromium.base.ApplicationStatus;
 import org.chromium.base.ContextUtils;
@@ -50,6 +51,7 @@ public class CobaltApplication extends Application implements StarboardBridge.Ho
       if (isBrowserProcess) {
           PathUtils.setPrivateDataDirectorySuffix(PRIVATE_DATA_DIRECTORY_SUFFIX);
           ApplicationStatus.initialize(this);
+          FirebaseApp.initializeApp(this);
       }
   }
 }
