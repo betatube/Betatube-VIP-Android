@@ -1,22 +1,22 @@
 {
   "project_info": {
-    "project_number": "123456789",
-    "project_id": "betatube-vip",
+    "project_number": "101641828525",
     "firebase_url": "https://betatube-vip-default-rtdb.firebaseio.com",
-    "storage_bucket": "betatube-vip.appspot.com"
+    "project_id": "betatube-vip",
+    "storage_bucket": "betatube-vip.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:123456789:android:abcdef123456",
+        "mobilesdk_app_id": "1:101641828525:android:65be242691302cdb8f2e24",
         "android_client_info": {
-          "package_name": "io.gh.reisxd.tizentube.cobalt"
+          "package_name": "com.mycompany.betatubedashboard"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBetaTubeVIPKeyPlaceholder"
+          "current_key": "AIzaSyDqh-TnlBHW-lVaxqEyPKlxisG3U4vMH1Q"
         }
       ],
       "services": {
