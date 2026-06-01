@@ -1,0 +1,33 @@
+name: Build BetaTube VIP APK
+
+on:
+  workflow_dispatch: # يتيح لك تشغيل البناء يدوياً بضغطة زر
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+        cache: 'gradle'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x cobalt/android/apk/gradlew
+
+    - name: Build Debug APK with Gradle
+      run: |
+        cd cobalt/android/apk/
+        ./gradlew assembleDebug
+
+    - name: Upload Finished APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: BetaTube-VIP-Debug-APK
+        path: cobalt/android/apk/app/build/outputs/apk/debug/app-debug.apk
