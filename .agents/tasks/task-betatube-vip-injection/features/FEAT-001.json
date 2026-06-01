@@ -1,0 +1,27 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Gradle configuration, Firebase setup, AndroidManifest creation, and google-services.json. This establishes the build system foundation for the BetaTube ecosystem.",
+  "status": "in_progress",
+  "steps": [
+    "Step 1: Modify /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/build.gradle - Add 'com.google.gms:google-services:4.3.15' classpath to the buildscript dependencies block.",
+    "Step 2: Modify /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/build.gradle - Add 'apply plugin: com.google.gms.google-services' after the android application plugin. Add Firebase BOM and Realtime Database dependencies: implementation platform('com.google.firebase:firebase-bom:32.7.0'), implementation 'com.google.firebase:firebase-database'.",
+    "Step 3: Create /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/google-services.json with Firebase config for project 'BetaTube-VIP' (project_id: betatube-vip, package_name: io.gh.reisxd.tizentube.cobalt, firebase_url: https://betatube-vip-default-rtdb.firebaseio.com).",
+    "Step 4: Create /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/src/app/AndroidManifest.xml with: xmlns:android, package=dev.cobalt.coat, permissions (INTERNET, ACCESS_NETWORK_STATE), application declaration referencing .app.CobaltApplication (full name dev.cobalt.app.CobaltApplication), activity declaration for .app.MainActivity with LEANBACK_LAUNCHER intent filter and TV meta-data, uses-feature android.software.leanback required=false, uses-feature android.hardware.touchscreen required=false.",
+    "Step 5: Create directory /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/src/app/res/values/ and add a colors.xml with basic color resources, and a strings.xml with app_name 'BetaTube VIP'."
+  ],
+  "acceptance_criteria": [
+    "build.gradle (top-level) contains google-services classpath dependency",
+    "app/build.gradle applies google-services plugin and has Firebase BOM + firebase-database dependency",
+    "google-services.json exists at app/ level with correct project config",
+    "AndroidManifest.xml exists at src/app/AndroidManifest.xml with proper activity/application declarations and INTERNET permission",
+    "res/values/strings.xml and colors.xml exist with valid XML"
+  ],
+  "verification": [
+    "Run: python3 -c \"import xml.etree.ElementTree as ET; ET.parse('/projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/src/app/AndroidManifest.xml'); print('Manifest XML valid')\"",
+    "Run: python3 -c \"import json; json.load(open('/projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/google-services.json')); print('google-services.json valid')\"",
+    "Run: grep 'google-services' /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/build.gradle && grep 'firebase-database' /projects/sandbox/Betatube-VIP-Android/cobalt/android/apk/app/build.gradle"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
