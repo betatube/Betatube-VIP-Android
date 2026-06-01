@@ -87,6 +87,10 @@ public class BetaTubeOverlayManager {
             return;
         }
 
+        if (!imageUrl.startsWith("https://")) {
+            return;
+        }
+
         new Thread(new Runnable() {
             @Override
             public void run() {

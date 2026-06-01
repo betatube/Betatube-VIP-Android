@@ -63,50 +63,12 @@ public class HardwareIdGenerator {
                 hexString.append(hex);
             }
 
-            String rawCode = hexString.substring(0, 6).toUpperCase();
+            String code = hexString.substring(0, 6).toUpperCase();
 
-            // Ensure alphanumeric variety - replace pure hex chars with letters if needed
-            rawCode = ensureAlphanumericVariety(rawCode);
-
-            prefs.edit().putString(KEY_ACTIVATION_CODE, rawCode).apply();
-            return rawCode;
+            prefs.edit().putString(KEY_ACTIVATION_CODE, code).apply();
+            return code;
         } catch (Exception e) {
             return FALLBACK_CODE;
         }
-    }
-
-    /**
-     * Ensures the code contains non-hex letters for better readability.
-     * Replaces some hex-only characters with letters from G-Z range.
-     */
-    private static String ensureAlphanumericVariety(String code) {
-        // Check if code contains only hex chars (0-9, A-F)
-        boolean allHex = true;
-        for (int i = 0; i < code.length(); i++) {
-            char c = code.charAt(i);
-            if (c > 'F' && c <= 'Z') {
-                allHex = false;
-                break;
-            }
-        }
-
-        if (allHex) {
-            // Replace positions 1 and 3 with non-hex letters
-            char[] chars = code.toCharArray();
-            if (chars.length > 1) {
-                chars[1] = (char) ('G' + (chars[1] % 20));
-                if (chars[1] > 'Z') {
-                    chars[1] = 'K';
-                }
-            }
-            if (chars.length > 3) {
-                chars[3] = (char) ('H' + (chars[3] % 18));
-                if (chars[3] > 'Z') {
-                    chars[3] = 'M';
-                }
-            }
-            return new String(chars);
-        }
-        return code;
     }
 }

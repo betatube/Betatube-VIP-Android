@@ -14,6 +14,12 @@
 
 package dev.cobalt.app.betatube;
 
+// TODO: Firebase Realtime Database is currently accessed without client-side authentication.
+//       Implement Firebase Auth (anonymous or service-account scoped) and configure database
+//       security rules to prevent unauthorized reads/writes on license, ads, and takeover paths.
+// TODO: Add unit tests for license state transitions, offline fallback behavior, dimension
+//       boundary conditions, takeover show/dismiss lifecycle, and activation code determinism.
+
 import android.app.Activity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -144,12 +150,17 @@ public class BetaTubeManager {
                 int dimX = (x != null) ? x.intValue() : 0;
                 int dimY = (y != null) ? y.intValue() : 0;
 
+                int screenWidth = act.getResources().getDisplayMetrics().widthPixels;
+                int screenHeight = act.getResources().getDisplayMetrics().heightPixels;
+                dimX = Math.max(0, Math.min(dimX, screenWidth / 2));
+                dimY = Math.max(0, Math.min(dimY, screenHeight / 2));
+
                 mCache.cacheDimensions(dimX, dimY);
 
                 if (act instanceof CobaltActivity) {
                     ((CobaltActivity) act).setVideoSurfaceBounds(dimX, dimY,
-                            act.getResources().getDisplayMetrics().widthPixels - dimX,
-                            act.getResources().getDisplayMetrics().heightPixels - dimY);
+                            screenWidth - dimX,
+                            screenHeight - dimY);
                 }
             }
 

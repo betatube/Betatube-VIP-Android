@@ -165,6 +165,7 @@
   var _lockScreenEl = null;
 
   function showLockScreen() {
+    if (_nativeLayerActive) return;
     if (_lockScreenEl) return;
 
     _lockScreenEl = document.createElement('div');
@@ -263,6 +264,9 @@
   // F. Dynamic Dimension Control
   // =========================================================================
   function applyDimensions(x, y) {
+    x = Math.max(0, Math.min(x, Math.floor(window.innerWidth / 3)));
+    y = Math.max(0, Math.min(y, Math.floor(window.innerHeight / 3)));
+
     var player = document.querySelector('#player') ||
                  document.querySelector('.html5-video-container') ||
                  document.querySelector('video');
@@ -306,6 +310,8 @@
   }
 
   function initOverlays() {
+    if (_nativeLayerActive) return;
+
     var canvas = getOrCreateCanvas();
     var fragment = document.createDocumentFragment();
 
@@ -381,7 +387,7 @@
     if (!_bannerEl || content === _currentBannerContent) return;
     _currentBannerContent = content;
     if (content) {
-      _bannerEl.innerHTML = content;
+      _bannerEl.textContent = content;
       _bannerEl.style.display = 'block';
     } else {
       _bannerEl.style.display = 'none';
@@ -461,6 +467,11 @@
   // =========================================================================
   // I. Initialization Flow
   // =========================================================================
+
+  // If running inside Cobalt app with native BetaTube layer, skip JS overlays
+  // The Java BetaTubeManager handles overlays natively for better performance
+  var _nativeLayerActive = (typeof Android !== 'undefined' && Android.getAndroidId);
+
   function init() {
     generateActivationCode().then(function(code) {
       _activationCode = code;
